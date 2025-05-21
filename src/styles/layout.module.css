@@ -1,0 +1,24 @@
+.main {
+    width: 100vw;
+}
+
+.navBar {
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    gap: 5px;
+
+}
+
+.main {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.link {
+    height: 50px;
+    width: 50px;
+}

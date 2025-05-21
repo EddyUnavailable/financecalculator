@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import './globals.css';
+import { BillProvider } from '@/context/BillContext';
+import styles from "@/styles/layout.module.css";
 
 export const metadata = {
   title: 'Finance Calculator',
@@ -10,11 +12,20 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="font-sans">
-        <nav className="bg-gray-100 p-4 mb-4">
-          <Link href="/" className="mr-4">Home</Link>
-          <Link href="/loan-calculator">Loan Calculator</Link>
+        <nav className={styles.navBar}>
+          <Link href="/budget/income" className={styles.link}>Income</Link>
+          <Link href="/budget/home" className={styles.link}>Home</Link>
+          <Link href="/budget/car" className={styles.link}>Car</Link>
+          <Link href="/budget/phone" className={styles.link}>Phone</Link>
+          <Link href="/budget/debt" className={styles.link}>Debt</Link>
+          <Link href="/budget/summary" className={styles.link}>Summary</Link>
+
         </nav>
-        {children}
+        <div className={styles.main}>
+          <BillProvider>
+            {children}
+          </BillProvider>
+        </div>
       </body>
     </html>
   );

@@ -1,0 +1,71 @@
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.total {
+  font-size: larger;
+}
+
+.title {
+  font-size: x-large;
+}
+.title, .total {
+  color: var(--green-0);
+  background-color: var(--green-8);
+  font-weight: 1000;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+color: var(--green-0);
+width: 100vw;
+background-color: aqua;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 320px;
+  
+  /* padding: 10px; */
+  background-color:var(--green-8);
+  
+}
+
+.label {
+  font-size: 20px;
+  color: var(--green-0);
+  font-weight: 1000;
+  text-align: center;
+  font-size: large;
+  background-color:var(--green-7);
+  width: 250px;
+  height: 30px;
+  border-radius: 10% / 50%;
+  border: 2px solid var(--foreground);
+}
+.input {
+  
+  color: var(--green-9);
+  width: 300px;
+  height: 75px;
+  text-align: center;
+  border-radius: 15% / 30%;
+  font-weight: 800;
+  font-size: medium;
+  background: var(--background-gre1);
+}
+
+.button {
+  color: blue;
+  width: 150px;
+  height: 50px;
+  font-weight: 900;
+  background: var(--background-gre2);
+  border-radius: 10% / 25%;
+  border: 3px outset var(--green-6);
+}
+

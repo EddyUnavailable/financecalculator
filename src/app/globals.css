@@ -1,19 +1,44 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  --green-0: rgb(0, 255, 0); 
+  --green-1: rgb(0, 200, 0); 
+  --green-2: rgb(0, 175, 0); 
+  --green-3: rgb(0, 150, 0); 
+  --green-4: rgb(0, 125, 0); 
+  --green-5: rgb(0, 100, 0); 
+  --green-6: rgb(0, 75, 0); 
+  --green-7: rgb(0, 50, 0); 
+  --green-8: rgb(0, 25, 0); 
+  --green-9: rgb(0, 0, 0); 
+
+
+--background-gre1: radial-gradient(
+  ellipse,
+  rgb(0, 255, 0) 60%,
+  rgb(0, 200, 0),
+  rgb(0, 175, 0)
+);
+
+--background-gre2: radial-gradient(
+  ellipse,
+  rgb(0, 100, 0) 60%,
+  rgb(0, 75, 0),
+  rgb(0, 50, 0)
+);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* .my-element {
+  background: var(--background-grey);
+} */
 
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
+  padding: 0%;
+  margin: 0%;
+  
 }
 
 body {
@@ -24,19 +49,3 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
