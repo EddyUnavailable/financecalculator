@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { useBills } from '@/context/BillContext';
+import styles from '@/styles/page.module.css'; // ✅ Use shared styles
 
 export default function IncomePage() {
   const { incomeItems, updateIncome, saveIncomeTotals, loading } = useBills();
   const [localIncomes, setLocalIncomes] = useState([]);
 
-  // Sync local state with context
   useEffect(() => {
     setLocalIncomes(incomeItems);
   }, [incomeItems]);
@@ -28,40 +28,46 @@ export default function IncomePage() {
     localIncomes.forEach(({ id, label, amount }) => {
       updateIncome(id, label, amount);
     });
-    // Removed alert confirmation
   };
 
-  if (loading) return <p>Loading incomes...</p>;
+  if (loading) return <p className={styles.loading}>Loading incomes...</p>;
 
   return (
-    <main style={{ padding: '2rem' }}>
-      <h1>Income Sources</h1>
-      <ul style={{ listStyle: 'none', padding: 0 }}>
-        {localIncomes.map(({ id, label, amount }) => (
-          <li key={id} style={{ marginBottom: '1rem' }}>
-            <input
-              type="text"
-              value={label}
-              onChange={(e) => handleInputChange(id, 'label', e.target.value)}
-              style={{ marginRight: '1rem', width: '150px' }}
-            />
-            <input
-              type="number"
-              step="0.01"
-              min="0"
-              value={amount}
-              onChange={(e) => handleInputChange(id, 'amount', e.target.value)}
-              style={{ width: '100px' }}
-            />
-          </li>
-        ))}
-      </ul>
+    <main className={styles.main}>
+      <form onSubmit={(e) => { e.preventDefault(); handleSave(); }} className={styles.form}>
+        <h1 className={styles.title}>Income Sources</h1>
 
-      <p>
-        <strong>Total Income: £{totalIncome.toFixed(2)}</strong>
-      </p>
+        <ul className={styles.incomeList}>
+          {localIncomes.map(({ id, label, amount }) => (
+            <li key={id} className={styles.field}>
+              <input
+                className={styles.input}
+                type="text"
+                value={label}
+                onChange={(e) => handleInputChange(id, 'label', e.target.value)}
+                placeholder="Label"
+              />
+              <input
+                className={styles.input}
+                type="number"
+                step="0.01"
+                min="0"
+                value={amount}
+                onChange={(e) => handleInputChange(id, 'amount', e.target.value)}
+                inputMode="decimal"
+              />
+            </li>
+          ))}
+        </ul>
 
-      <button onClick={handleSave}>Save Income Data</button>
+        <button type="submit" className={styles.button}>
+          Save Income Data
+        </button>
+
+        <h3 className={styles.total}>
+          Total Income: £{totalIncome.toFixed(2)}
+        </h3>
+      </form>
     </main>
   );
 }

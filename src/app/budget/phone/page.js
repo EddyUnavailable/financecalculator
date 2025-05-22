@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { useBills } from '@/context/BillContext';
+import styles from '@/styles/page.module.css'; // ✅ Import shared styles
 
 export default function PhonePage() {
   const { addBill, bills } = useBills();
 
   const labels = ['mobile1', 'mobile2', 'internet'];
 
-  // Map of existing bill amounts
   const billsMap = bills.phone.reduce((acc, bill) => {
     acc[bill.label] = bill.amount;
     return acc;
@@ -52,14 +52,14 @@ export default function PhonePage() {
     label.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\d/, ' $&');
 
   return (
-    <main style={{ padding: '2rem' }}>
-      <h1>Phone & Internet Expenses</h1>
-
-      <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
+    <main className={styles.main}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <h1 className={styles.title}>Phone & Internet Expenses</h1>
         {labels.map((field) => (
-          <div key={field} style={{ marginBottom: '1rem' }}>
-            <label style={{ marginRight: '1rem' }}>{formatLabel(field)}:</label>
+          <div key={field} className={styles.field}>
+            <label className={styles.label}>{formatLabel(field)}:</label>
             <input
+              className={styles.input}
               type="number"
               step="0.01"
               min="0"
@@ -71,10 +71,13 @@ export default function PhonePage() {
             />
           </div>
         ))}
-        <button type="submit">Update Phone Bills</button>
+        <button type="submit" className={styles.button}>
+          Update Phone Bills
+        </button>
+        <h3 className={styles.total}>
+          Total Phone Costs: £{total.toFixed(2)}
+        </h3>
       </form>
-
-      <h3>Total Phone Costs: £{total.toFixed(2)}</h3>
     </main>
   );
 }

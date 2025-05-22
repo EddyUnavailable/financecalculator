@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { useBills } from '@/context/BillContext';
+import styles from '@/styles/page.module.css'; // ✅ Shared styles
 
 export default function HomePage() {
   const { bills, addBill } = useBills();
 
   const labels = ['rent', 'water', 'cTax', 'gas', 'other1', 'other2', 'other3'];
 
-  // Convert current bills into a quick lookup map
   const billsMap = bills.home.reduce((acc, bill) => {
     acc[bill.label] = bill.amount;
     return acc;
@@ -21,7 +21,6 @@ export default function HomePage() {
     }, {})
   );
 
-  // Keep form state in sync with latest bills
   useEffect(() => {
     const updatedForm = labels.reduce((acc, label) => {
       acc[label] = billsMap[label]?.toFixed(2) || '0.00';
@@ -44,7 +43,6 @@ export default function HomePage() {
     });
   };
 
-  // Total based on current form values to reflect edits
   const total = Object.values(form).reduce((sum, value) => {
     const num = parseFloat(value);
     return sum + (isNaN(num) ? 0 : num);
@@ -64,14 +62,15 @@ export default function HomePage() {
   };
 
   return (
-    <main style={{ padding: '2rem' }}>
-      <h1>Home Expenses</h1>
+    <main className={styles.main}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <h1 className={styles.title}>Home Expenses</h1>
 
-      <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
         {labels.map((field) => (
-          <div key={field} style={{ marginBottom: '1rem' }}>
-            <label style={{ marginRight: '1rem' }}>{formatLabel(field)}:</label>
+          <div key={field} className={styles.field}>
+            <label className={styles.label}>{formatLabel(field)}:</label>
             <input
+              className={styles.input}
               type="number"
               step="0.01"
               min="0"
@@ -83,10 +82,15 @@ export default function HomePage() {
             />
           </div>
         ))}
-        <button type="submit">Update Home Bills</button>
-      </form>
 
-      <h3>Total Home Costs: £{total.toFixed(2)}</h3>
+        <button className={styles.button} type="submit">
+          Update
+        </button>
+
+        <h3 className={styles.total}>
+          Total Home Costs: £{total.toFixed(2)}
+        </h3>
+      </form>
     </main>
   );
 }

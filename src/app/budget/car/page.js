@@ -64,9 +64,8 @@ export default function CarPage() {
 
   return (
     <main className={styles.main}>
-      <h1 className={styles.title}>Car Expenses</h1>
-
       <form onSubmit={handleSubmit} className={styles.form}>
+        <h1 className={styles.title}>Car Expenses</h1>
         {labels.map((field) => (
           <div key={field} className={styles.field}>
             <label className={styles.label}>{formatLabel(field)}:</label>
@@ -83,9 +82,10 @@ export default function CarPage() {
           </div>
         ))}
         <button className={styles.button} type="submit">Update</button>
+        <h3 className={styles.total}>Total: £{total.toFixed(2)}</h3>
       </form>
 
-      <h3 className={styles.total}>Total Car Costs: £{total.toFixed(2)}</h3>
+      
     </main>
   );
 }

@@ -2,14 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { useBills } from '@/context/BillContext';
-import styles from '@/styles/page.module.css'; // ✅ Import shared styles
+import styles from '@/styles/page.module.css';
 
 export default function DebtPage() {
   const { addBill, bills } = useBills();
 
   const labels = ['debt1', 'debt2', 'debt3', 'debt4', 'debt5'];
 
-  // Create a map of existing bills
   const billsMap = bills.debt.reduce((acc, bill) => {
     acc[bill.label] = bill.amount;
     return acc;
@@ -54,13 +53,14 @@ export default function DebtPage() {
 
   return (
     <main className={styles.main}>
-      <h1 className={styles.title}>Debt Payments</h1>
-
       <form onSubmit={handleSubmit} className={styles.form}>
+        <h1 className={styles.title}>Debt Payments</h1>
+
         {labels.map((field) => (
           <div key={field} className={styles.field}>
             <label className={styles.label}>{formatLabel(field)}:</label>
             <input
+              className={styles.input}
               type="number"
               step="0.01"
               min="0"
@@ -72,14 +72,15 @@ export default function DebtPage() {
             />
           </div>
         ))}
-        <button type="submit" className={styles.button}>
-          Update Debt Payments
-        </button>
-      </form>
 
-      <h3 className={styles.total}>
-        Total Debt Payments: £{total.toFixed(2)}
-      </h3>
+        <button type="submit" className={styles.button}>
+          Update
+        </button>
+
+        <h3 className={styles.total}>
+          Total Debt Payments: £{total.toFixed(2)}
+        </h3>
+      </form>
     </main>
   );
 }

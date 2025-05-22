@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
       <body className="font-sans">
         <nav className={styles.navBar}>
           <Link href="/budget/income" className={styles.link}>Income</Link>
-          <Link href="/budget/home" className={styles.link}>Home</Link>
+          <Link href="/budget/home" className={styles.link}>🏠</Link>
           <Link href="/budget/car" className={styles.link}>Car</Link>
           <Link href="/budget/phone" className={styles.link}>Phone</Link>
           <Link href="/budget/debt" className={styles.link}>Debt</Link>

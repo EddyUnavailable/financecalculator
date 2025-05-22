@@ -1,6 +1,10 @@
 .main {
   display: flex;
   flex-direction: column;
+  background-color: #000;
+  color: #00ff00;
+  
+  text-shadow: 0 0 2px #0f0, 0 0 5px #0f0;
 }
 
 .total {
@@ -12,25 +16,29 @@
 }
 .title, .total {
   color: var(--green-0);
+  text-align: center;
   background-color: var(--green-8);
-  font-weight: 1000;
+  font-weight: 700;
+  width: 100%;
+  
 }
 
 .form {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-color: var(--green-0);
-width: 100vw;
-background-color: aqua;
+  color: var(--green-0);
+  width: 100%;
+  
 }
+
 
 .field {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 320px;
-  
-  /* padding: 10px; */
+  width: 100%;
   background-color:var(--green-8);
   
 }
@@ -38,14 +46,17 @@ background-color: aqua;
 .label {
   font-size: 20px;
   color: var(--green-0);
-  font-weight: 1000;
+  font-weight: 700;
   text-align: center;
   font-size: large;
+  
   background-color:var(--green-7);
+  box-sizing: border-box;
   width: 250px;
   height: 30px;
   border-radius: 10% / 50%;
-  border: 2px solid var(--foreground);
+  border: 2px inset var(--foreground);
+  
 }
 .input {
   
@@ -53,19 +64,48 @@ background-color: aqua;
   width: 300px;
   height: 75px;
   text-align: center;
-  border-radius: 15% / 30%;
+  border-radius: 10% / 25%;
   font-weight: 800;
   font-size: medium;
   background: var(--background-gre1);
+  
 }
 
 .button {
-  color: blue;
+  color: var(--green-0);
   width: 150px;
   height: 50px;
   font-weight: 900;
   background: var(--background-gre2);
   border-radius: 10% / 25%;
-  border: 3px outset var(--green-6);
+  border: 5px outset var(--green-6);
 }
 
+.section {
+  margin-bottom: 2rem;
+  width: 100%;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: large;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--green-0);
+  background-color: var(--green-7);
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+.list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.listItem {
+  margin-bottom: 0.5rem;
+  font-size: medium;
+  color: var(--green-0);
+}
