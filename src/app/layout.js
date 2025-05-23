@@ -13,12 +13,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="font-sans">
         <nav className={styles.navBar}>
-          <Link href="/budget/income" className={styles.link}>Income</Link>
-          <Link href="/budget/home" className={styles.link}>🏠</Link>
-          <Link href="/budget/car" className={styles.link}>Car</Link>
-          <Link href="/budget/phone" className={styles.link}>Phone</Link>
-          <Link href="/budget/debt" className={styles.link}>Debt</Link>
-          <Link href="/budget/summary" className={styles.link}>Summary</Link>
+          <Link href="/budget/income" className={styles.link}><img src="/attach_money.png" alt="Home" className={styles.icon} /></Link>
+          <Link href="/budget/home" className={styles.link}><img src="/home2.png" alt="Home" className={styles.icon} /></Link>
+          <Link href="/budget/car" className={styles.link}><img src="/directions_car.png" alt="Home" className={styles.icon} /></Link>
+          <Link href="/budget/phone" className={styles.link}><img src="/home2.png" alt="Home" className={styles.icon} /></Link>
+          <Link href="/budget/debt" className={styles.link}><img src="/credit_card.png" alt="Home" className={styles.icon} /></Link>
+          <Link href="/budget/summary" className={styles.link}><img src="/account_box.png" alt="Home" className={styles.icon} /></Link>
 
         </nav>
         <div className={styles.main}>

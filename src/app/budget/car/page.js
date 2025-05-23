@@ -81,7 +81,7 @@ export default function CarPage() {
             />
           </div>
         ))}
-        <button className={styles.button} type="submit">Update</button>
+        <button className={styles.button} type="submit">Save</button>
         <h3 className={styles.total}>Total: £{total.toFixed(2)}</h3>
       </form>
 

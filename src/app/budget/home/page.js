@@ -84,7 +84,7 @@ export default function HomePage() {
         ))}
 
         <button className={styles.button} type="submit">
-          Update
+          Save
         </button>
 
         <h3 className={styles.total}>

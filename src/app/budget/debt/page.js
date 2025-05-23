@@ -74,7 +74,7 @@ export default function DebtPage() {
         ))}
 
         <button type="submit" className={styles.button}>
-          Update
+          Save
         </button>
 
         <h3 className={styles.total}>

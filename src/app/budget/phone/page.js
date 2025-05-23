@@ -54,7 +54,7 @@ export default function PhonePage() {
   return (
     <main className={styles.main}>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <h1 className={styles.title}>Phone & Internet Expenses</h1>
+        <h1 className={styles.title}>Phone & Internet</h1>
         {labels.map((field) => (
           <div key={field} className={styles.field}>
             <label className={styles.label}>{formatLabel(field)}:</label>
@@ -72,7 +72,7 @@ export default function PhonePage() {
           </div>
         ))}
         <button type="submit" className={styles.button}>
-          Update Phone Bills
+          Save
         </button>
         <h3 className={styles.total}>
           Total Phone Costs: £{total.toFixed(2)}

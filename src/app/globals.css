@@ -15,10 +15,10 @@
 
 
 --background-gre1: radial-gradient(
-  ellipse,
-  rgb(0, 255, 0) 60%,
-  rgb(0, 200, 0),
-  rgb(0, 175, 0)
+  150% 100% at center,
+  rgb(0, 255, 0) 20%,
+  rgb(0, 175, 0) 60%,
+  rgb(0, 125, 0) 100%
 );
 
 --background-gre2: radial-gradient(

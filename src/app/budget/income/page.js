@@ -41,7 +41,7 @@ export default function IncomePage() {
           {localIncomes.map(({ id, label, amount }) => (
             <li key={id} className={styles.field}>
               <input
-                className={styles.input}
+                className={styles.label}
                 type="text"
                 value={label}
                 onChange={(e) => handleInputChange(id, 'label', e.target.value)}
@@ -61,7 +61,7 @@ export default function IncomePage() {
         </ul>
 
         <button type="submit" className={styles.button}>
-          Save Income Data
+          Save
         </button>
 
         <h3 className={styles.total}>
