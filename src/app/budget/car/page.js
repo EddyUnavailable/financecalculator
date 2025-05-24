@@ -81,8 +81,10 @@ export default function CarPage() {
             />
           </div>
         ))}
+        <div className={styles.sticky}>
         <button className={styles.button} type="submit">Save</button>
         <h3 className={styles.total}>Total: £{total.toFixed(2)}</h3>
+        </div>
       </form>
 
       

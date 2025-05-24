@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useBills } from '@/context/BillContext';
-import styles from '@/styles/page.module.css'; // ✅ Use shared styles
+import styles from '@/styles/page.module.css';
 
 export default function IncomePage() {
   const { incomeItems, updateIncome, saveIncomeTotals, loading } = useBills();
@@ -37,36 +37,35 @@ export default function IncomePage() {
       <form onSubmit={(e) => { e.preventDefault(); handleSave(); }} className={styles.form}>
         <h1 className={styles.title}>Income Sources</h1>
 
-        <ul className={styles.incomeList}>
-          {localIncomes.map(({ id, label, amount }) => (
-            <li key={id} className={styles.field}>
-              <input
-                className={styles.label}
-                type="text"
-                value={label}
-                onChange={(e) => handleInputChange(id, 'label', e.target.value)}
-                placeholder="Label"
-              />
-              <input
-                className={styles.input}
-                type="number"
-                step="0.01"
-                min="0"
-                value={amount}
-                onChange={(e) => handleInputChange(id, 'amount', e.target.value)}
-                inputMode="decimal"
-              />
-            </li>
-          ))}
-        </ul>
-
+        {localIncomes.map(({ id, label, amount }) => (
+          <div key={id} className={styles.field}>
+            <input
+              className={styles.label}
+              type="text"
+              value={label}
+              onChange={(e) => handleInputChange(id, 'label', e.target.value)}
+              placeholder="Label"
+            />
+            <input
+              className={styles.input}
+              type="number"
+              step="0.01"
+              min="0"
+              value={amount}
+              onChange={(e) => handleInputChange(id, 'amount', e.target.value)}
+              inputMode="decimal"
+            />
+          </div>
+        ))}
+        <div className={styles.sticky}>
         <button type="submit" className={styles.button}>
           Save
         </button>
 
         <h3 className={styles.total}>
-          Total Income: £{totalIncome.toFixed(2)}
+          Total: £{totalIncome.toFixed(2)}
         </h3>
+        </div>
       </form>
     </main>
   );

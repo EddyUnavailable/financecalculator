@@ -82,14 +82,15 @@ export default function HomePage() {
             />
           </div>
         ))}
-
+        <div className={styles.sticky}>
         <button className={styles.button} type="submit">
           Save
         </button>
 
         <h3 className={styles.total}>
-          Total Home Costs: £{total.toFixed(2)}
+          Total: £{total.toFixed(2)}
         </h3>
+        </div>
       </form>
     </main>
   );

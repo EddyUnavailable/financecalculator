@@ -82,6 +82,7 @@
 }
 
 .button {
+  box-sizing: border-box;
   color: var(--green-3);
   width: 150px;
   height: 50px;
@@ -93,6 +94,7 @@
 
 .button:hover {
   border: 5px outset var(--green-2);
+  color: var(--green-1);
 }
 
 .section {
@@ -100,6 +102,24 @@
   width: 100%;
   text-align: center;
 }
+
+.sticky {
+  position: fixed;
+  bottom: 0;
+  background: var(--green-8); /* or another background for contrast */
+  z-index: 10;
+  /* display: flex;
+  justify-content: space-between; */
+  align-items: center;
+  border-top: 1px solid var(--green-9);
+  height: 101px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0px;
+}
+
 
 .subtitle {
   font-size: large;

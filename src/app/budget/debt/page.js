@@ -72,14 +72,15 @@ export default function DebtPage() {
             />
           </div>
         ))}
-
+        <div className={styles.sticky}>
         <button type="submit" className={styles.button}>
           Save
         </button>
 
         <h3 className={styles.total}>
-          Total Debt Payments: £{total.toFixed(2)}
+          Total: £{total.toFixed(2)}
         </h3>
+        </div>
       </form>
     </main>
   );

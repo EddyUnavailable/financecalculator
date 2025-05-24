@@ -71,13 +71,16 @@ export default function PhonePage() {
             />
           </div>
         ))}
+        <div className={styles.sticky}>        
         <button type="submit" className={styles.button}>
           Save
         </button>
         <h3 className={styles.total}>
-          Total Phone Costs: £{total.toFixed(2)}
+          Total: £{total.toFixed(2)}
         </h3>
+        </div>
       </form>
+
     </main>
   );
 }
