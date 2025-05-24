@@ -34,6 +34,14 @@
   rgb(0, 75, 0),
   rgb(0, 50, 0)
 );
+
+
+--background-gre4: radial-gradient(
+  circle,
+  rgb(0, 100, 0) 40%,
+  rgb(0, 75, 0) 60%, 
+  rgb(0, 50, 0)
+);
 }
 
 /* .my-element {
