@@ -16,9 +16,16 @@
 
 --background-gre1: radial-gradient(
   150% 100% at center,
-  rgb(0, 255, 0) 20%,
-  rgb(0, 175, 0) 60%,
-  rgb(0, 125, 0) 100%
+  rgb(0, 150, 0) 20%,
+  rgb(0, 125, 0) 40%,
+  rgb(0, 100, 0) 60%
+);
+
+--background-gre3: radial-gradient(
+  150% 100% at center,
+  rgb(0, 225, 0) 20%,
+  rgb(0, 200, 0) 40%,
+  rgb(0, 150, 0) 70%
 );
 
 --background-gre2: radial-gradient(

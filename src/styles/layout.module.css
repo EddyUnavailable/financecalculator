@@ -30,3 +30,7 @@
     border: 3px outset var(--green-4);
     border-radius: 50%;
 }
+
+.icon {
+    color: var(--green-4);
+}
