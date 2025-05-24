@@ -58,7 +58,7 @@
 }
 .input {
   position: relative;
-  width: 300px;
+  width: 320px;
   height: 75px;
   text-align: center;
   font-weight: 800;
@@ -113,7 +113,7 @@
   align-items: center;
   border-top: 1px solid var(--green-9);
   height: 101px;
-  width: 320px;
+  width: 360px;
   display: flex;
   flex-direction: column;
   justify-content: center;
