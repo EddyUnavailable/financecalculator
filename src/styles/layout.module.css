@@ -61,3 +61,12 @@
 .icon {
     filter: invert(88%) sepia(30%) saturate(5428%) hue-rotate(78deg) brightness(75%);
 }
+
+/* page.js */
+
+.page {
+    font-size: large;
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--green-3);
+    background: var(--green-6);
+}
