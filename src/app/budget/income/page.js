@@ -5,7 +5,7 @@ import { useBills } from '@/context/BillContext';
 import styles from '@/styles/page.module.css';
 
 export default function IncomePage() {
-  const { incomeItems, updateIncome, saveIncomeTotals, loading } = useBills();
+  const { incomeItems, updateIncome, loading } = useBills();
   const [localIncomes, setLocalIncomes] = useState([]);
 
   useEffect(() => {
@@ -34,7 +34,13 @@ export default function IncomePage() {
 
   return (
     <main className={styles.main}>
-      <form onSubmit={(e) => { e.preventDefault(); handleSave(); }} className={styles.form}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSave();
+        }}
+        className={styles.form}
+      >
         <h1 className={styles.title}>Income Sources</h1>
 
         {localIncomes.map(({ id, label, amount }) => (
@@ -45,6 +51,7 @@ export default function IncomePage() {
               value={label}
               onChange={(e) => handleInputChange(id, 'label', e.target.value)}
               placeholder="Label"
+              disabled={loading}
             />
             <input
               className={styles.input}
@@ -54,17 +61,23 @@ export default function IncomePage() {
               value={amount}
               onChange={(e) => handleInputChange(id, 'amount', e.target.value)}
               inputMode="decimal"
+              disabled={loading}
             />
           </div>
         ))}
-        <div className={styles.sticky}>
-        <button type="submit" className={styles.button}>
-          Save
-        </button>
 
-        <h3 className={styles.total}>
-          Total: £{totalIncome.toFixed(2)}
-        </h3>
+        <div className={styles.sticky}>
+          <button
+            type="submit"
+            className={styles.button}
+            disabled={loading}
+          >
+            {loading ? 'Saving...' : 'Save'}
+          </button>
+
+          <h3 className={styles.total}>
+            Total: £{totalIncome.toFixed(2)}
+          </h3>
         </div>
       </form>
     </main>

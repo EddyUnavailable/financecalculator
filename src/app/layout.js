@@ -6,11 +6,6 @@ import './globals.css';
 import { BillProvider } from '@/context/BillContext';
 import styles from "@/styles/layout.module.css";
 
-// export const metadata = {
-//   title: 'Finance Calculator',
-//   description: 'Tools to help you manage your money',
-// };
-
 export default function RootLayout({ children }) {
   const pathname = usePathname();
 

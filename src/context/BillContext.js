@@ -2,8 +2,7 @@
 
 import { createContext, useContext, useState, useEffect } from 'react';
 
-const BillContext = createContext();
-
+const BillContext = createContext(null);
 const STORAGE_KEY = 'budget-data';
 
 const DEFAULT_INCOMES = [
@@ -25,18 +24,16 @@ export function BillProvider({ children }) {
   const [bills, setBills] = useState(DEFAULT_BILLS);
   const [loading, setLoading] = useState(true);
 
-  // Load from localStorage
+  // Load from localStorage on mount
   useEffect(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
         if (parsed) {
-          // Load income items if present and valid
-          if (Array.isArray(parsed.incomeItems) && parsed.incomeItems.length === 4) {
+          if (Array.isArray(parsed.incomeItems)) {
             setIncomeItems(parsed.incomeItems);
           }
-          // Load bills if present, fallback to default structure for safety
           if (parsed.bills && typeof parsed.bills === 'object') {
             setBills({
               home: Array.isArray(parsed.bills.home) ? parsed.bills.home : [],
@@ -48,46 +45,67 @@ export function BillProvider({ children }) {
         }
       }
     } catch (err) {
-      console.error('Failed to load data from localStorage:', err);
+      console.error('Failed to load from localStorage:', err);
     }
     setLoading(false);
   }, []);
 
-  // Save all data (income + bills) to localStorage
-  const saveAll = (newIncomeItems = incomeItems, newBills = bills) => {
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({ incomeItems: newIncomeItems, bills: newBills })
-    );
-  };
-
-  function updateIncome(id, label, amount) {
-    setIncomeItems((prev) => {
-      const updated = prev.map((item) =>
-        item.id === id ? { ...item, label, amount: parseFloat(amount) || 0 } : item
-      );
-      saveAll(updated, bills);
-      return updated;
-    });
-  }
-
-  function addBill(category, label, amount) {
-    if (!bills[category]) {
-      console.warn(`Category "${category}" not found in bills`);
-      return;
+  // Save changes to localStorage
+  useEffect(() => {
+    if (!loading) {
+      const dataToStore = JSON.stringify({ incomeItems, bills });
+      localStorage.setItem(STORAGE_KEY, dataToStore);
+      console.log('✅ Saved to localStorage:', dataToStore);
     }
+  }, [incomeItems, bills, loading]);
+
+  // Update an income item
+  function updateIncome(id, label, amount) {
+    setIncomeItems((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? { ...item, label, amount: parseFloat(amount) || 0 }
+          : item
+      )
+    );
+  }
+
+  // Add or update a single bill entry
+  function setBill(category, label, amount) {
     setBills((prev) => {
-      const updatedCategory = [...prev[category], { label, amount: parseFloat(amount) || 0 }];
-      const updatedBills = { ...prev, [category]: updatedCategory };
-      saveAll(incomeItems, updatedBills);
-      return updatedBills;
+      const items = prev[category] || [];
+      const index = items.findIndex((item) => item.label === label);
+      let updated;
+
+      if (index >= 0) {
+        updated = items.map((item) =>
+          item.label === label ? { ...item, amount: parseFloat(amount) || 0 } : item
+        );
+      } else {
+        updated = [...items, { label, amount: parseFloat(amount) || 0 }];
+      }
+
+      return { ...prev, [category]: updated };
     });
   }
 
+  // Set initial default bills ONCE for a page
+  function setInitialBills(category, items) {
+    setBills((prev) => {
+      const existingLabels = new Set((prev[category] || []).map((item) => item.label));
+      const isSameLength = (prev[category] || []).length === items.length;
+      const hasSameLabels = items.every((item) => existingLabels.has(item.label));
+
+      if (isSameLength && hasSameLabels) return prev; // Prevent overwriting duplicates
+
+      return { ...prev, [category]: items };
+    });
+  }
+
+  // Reset everything
   function resetToDefault() {
     setIncomeItems(DEFAULT_INCOMES);
     setBills(DEFAULT_BILLS);
-    saveAll(DEFAULT_INCOMES, DEFAULT_BILLS);
   }
 
   return (
@@ -95,8 +113,9 @@ export function BillProvider({ children }) {
       value={{
         incomeItems,
         updateIncome,
-        addBill,
         bills,
+        setBill,
+        setInitialBills,
         resetToDefault,
         loading,
       }}
@@ -106,4 +125,10 @@ export function BillProvider({ children }) {
   );
 }
 
-export const useBills = () => useContext(BillContext);
+export const useBills = () => {
+  const context = useContext(BillContext);
+  if (!context) {
+    throw new Error('useBills must be used within a BillProvider');
+  }
+  return context;
+};

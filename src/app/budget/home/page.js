@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useBills } from '@/context/BillContext';
-import styles from '@/styles/page.module.css'; // ✅ Shared styles
+import styles from '@/styles/page.module.css';
 
 export default function HomePage() {
-  const { bills, addBill } = useBills();
+  const { bills, setBill, loading } = useBills();
 
   const labels = ['rent', 'water', 'cTax', 'gas', 'other1', 'other2', 'other3'];
 
@@ -39,7 +39,7 @@ export default function HomePage() {
     e.preventDefault();
     Object.entries(form).forEach(([label, value]) => {
       const amount = parseFloat(value);
-      addBill('home', label, isNaN(amount) ? 0 : amount);
+      setBill('home', label, isNaN(amount) ? 0 : amount);
     });
   };
 
@@ -61,6 +61,8 @@ export default function HomePage() {
     return labelsMap[label] || label;
   };
 
+  if (loading) return <p className={styles.loading}>Loading home expenses...</p>;
+
   return (
     <main className={styles.main}>
       <form onSubmit={handleSubmit} className={styles.form}>
@@ -79,17 +81,17 @@ export default function HomePage() {
               onChange={handleChange}
               required
               inputMode="decimal"
+              disabled={loading}
             />
           </div>
         ))}
-        <div className={styles.sticky}>
-        <button className={styles.button} type="submit">
-          Save
-        </button>
 
-        <h3 className={styles.total}>
-          Total: £{total.toFixed(2)}
-        </h3>
+        <div className={styles.sticky}>
+          <button className={styles.button} type="submit" disabled={loading}>
+            {loading ? 'Saving...' : 'Save'}
+          </button>
+
+          <h3 className={styles.total}>Total: £{total.toFixed(2)}</h3>
         </div>
       </form>
     </main>

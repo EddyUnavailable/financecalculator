@@ -5,12 +5,11 @@ import { useBills } from '@/context/BillContext';
 import styles from "@/styles/page.module.css";
 
 export default function CarPage() {
-  const { addBill, bills } = useBills();
+  const { setBill, bills, loading } = useBills();
 
   const labels = ['tax', 'insurance', 'diesel', 'maintenance', 'other'];
 
-  // Convert current bills into a quick lookup
-  const billsMap = bills.car.reduce((acc, bill) => {
+  const billsMap = (bills.car || []).reduce((acc, bill) => {
     acc[bill.label] = bill.amount;
     return acc;
   }, {});
@@ -22,7 +21,6 @@ export default function CarPage() {
     }, {})
   );
 
-  // Sync form fields when bills are updated
   useEffect(() => {
     const updatedForm = labels.reduce((acc, label) => {
       acc[label] = billsMap[label]?.toFixed(2) || '0.00';
@@ -33,7 +31,6 @@ export default function CarPage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Allow only valid number format with max 2 decimal places
     if (!/^\d*\.?\d{0,2}$/.test(value)) return;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
@@ -42,7 +39,7 @@ export default function CarPage() {
     e.preventDefault();
     Object.entries(form).forEach(([label, value]) => {
       const amount = parseFloat(value);
-      addBill('car', label, isNaN(amount) ? 0 : amount);
+      setBill('car', label, isNaN(amount) ? 0 : amount);
     });
   };
 
@@ -62,32 +59,37 @@ export default function CarPage() {
     return map[label] || label;
   };
 
+  if (loading) return <p className={styles.loading}>Loading car expenses...</p>;
+
   return (
     <main className={styles.main}>
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1 className={styles.title}>Car Expenses</h1>
+
         {labels.map((field) => (
           <div key={field} className={styles.field}>
             <label className={styles.label}>{formatLabel(field)}:</label>
             <input
-             className={styles.input}
+              className={styles.input}
               type="number"
               step="0.01"
               min="0"
               name={field}
               value={form[field]}
               onChange={handleChange}
+              disabled={loading}
               required
             />
           </div>
         ))}
+
         <div className={styles.sticky}>
-        <button className={styles.button} type="submit">Save</button>
-        <h3 className={styles.total}>Total: £{total.toFixed(2)}</h3>
+          <button className={styles.button} type="submit" disabled={loading}>
+            {loading ? 'Saving...' : 'Save'}
+          </button>
+          <h3 className={styles.total}>Total: £{total.toFixed(2)}</h3>
         </div>
       </form>
-
-      
     </main>
   );
 }

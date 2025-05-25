@@ -5,7 +5,7 @@ import { useBills } from '@/context/BillContext';
 import styles from '@/styles/page.module.css';
 
 export default function DebtPage() {
-  const { addBill, bills } = useBills();
+  const { setBill, bills, loading } = useBills();
 
   const labels = ['debt1', 'debt2', 'debt3', 'debt4', 'debt5'];
 
@@ -39,7 +39,7 @@ export default function DebtPage() {
     e.preventDefault();
     Object.entries(form).forEach(([label, value]) => {
       const amount = parseFloat(value);
-      addBill('debt', label, isNaN(amount) ? 0 : amount);
+      setBill('debt', label, isNaN(amount) ? 0 : amount);
     });
   };
 
@@ -50,6 +50,8 @@ export default function DebtPage() {
 
   const formatLabel = (label) =>
     label.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\d/, ' $&');
+
+  if (loading) return <p className={styles.loading}>Loading debt payments...</p>;
 
   return (
     <main className={styles.main}>
@@ -69,17 +71,16 @@ export default function DebtPage() {
               onChange={handleChange}
               required
               inputMode="decimal"
+              disabled={loading}
             />
           </div>
         ))}
         <div className={styles.sticky}>
-        <button type="submit" className={styles.button}>
-          Save
-        </button>
+          <button type="submit" className={styles.button} disabled={loading}>
+            {loading ? 'Saving...' : 'Save'}
+          </button>
 
-        <h3 className={styles.total}>
-          Total: £{total.toFixed(2)}
-        </h3>
+          <h3 className={styles.total}>Total: £{total.toFixed(2)}</h3>
         </div>
       </form>
     </main>

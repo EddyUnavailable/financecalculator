@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   background: var(--green-8);
-  color: var(--background-gre3);  
 }
 
 .total {
@@ -13,12 +12,13 @@
   font-size: x-large;
 }
 .title, .total {
-  color: var(--background-gre3); 
+  color: var(--green-1);
   text-align: center;
-  background-color: var(--green-8);
+  background-color: var(--green-7);
   font-weight: 700;
-  width: 100%;
+  width: 250px;
   height: 100%;
+  border: 2px solid var(--green-6);
 }
 
 .form {
@@ -97,11 +97,7 @@
   color: var(--green-1);
 }
 
-.section {
-  margin-bottom: 2rem;
-  width: 100%;
-  text-align: center;
-}
+
 
 .sticky {
   position: fixed;
@@ -119,25 +115,3 @@
 }
 
 
-.subtitle {
-  font-size: large;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  color: var(--green-0);
-  background-color: var(--green-7);
-  padding: 0.5rem;
-  border-radius: 10px;
-}
-
-.list {
-  list-style: none;
-  padding-left: 0;
-  margin: 0 auto;
-  width: fit-content;
-}
-
-.listItem {
-  margin-bottom: 0.5rem;
-  font-size: medium;
-  color: var(--green-0);
-}

@@ -44,7 +44,7 @@
     align-content: center;
     height: 60px;
     width: 15%;
-    max-width: 75px;
+    max-width: 76px;
     aspect-ratio: 1 / 1;
     background: var(--background-gre4);
     border: 3px outset var(--green-5);

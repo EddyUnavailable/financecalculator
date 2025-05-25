@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useBills } from '@/context/BillContext';
-import styles from '@/styles/page.module.css'; // ✅ Import shared styles
+import styles from '@/styles/page.module.css';
 
 export default function PhonePage() {
-  const { addBill, bills } = useBills();
+  const { setBill, bills, loading } = useBills();
 
   const labels = ['mobile1', 'mobile2', 'internet'];
 
@@ -39,7 +39,7 @@ export default function PhonePage() {
     e.preventDefault();
     Object.entries(form).forEach(([label, value]) => {
       const amount = parseFloat(value);
-      addBill('phone', label, isNaN(amount) ? 0 : amount);
+      setBill('phone', label, isNaN(amount) ? 0 : amount);
     });
   };
 
@@ -50,6 +50,8 @@ export default function PhonePage() {
 
   const formatLabel = (label) =>
     label.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\d/, ' $&');
+
+  if (loading) return <p className={styles.loading}>Loading phone & internet data...</p>;
 
   return (
     <main className={styles.main}>
@@ -68,19 +70,17 @@ export default function PhonePage() {
               onChange={handleChange}
               required
               inputMode="decimal"
+              disabled={loading}
             />
           </div>
         ))}
-        <div className={styles.sticky}>        
-        <button type="submit" className={styles.button}>
-          Save
-        </button>
-        <h3 className={styles.total}>
-          Total: £{total.toFixed(2)}
-        </h3>
+        <div className={styles.sticky}>
+          <button type="submit" className={styles.button} disabled={loading}>
+            {loading ? 'Saving...' : 'Save'}
+          </button>
+          <h3 className={styles.total}>Total: £{total.toFixed(2)}</h3>
         </div>
       </form>
-
     </main>
   );
 }
