@@ -13,7 +13,7 @@
   max-width: 100%;
   padding: 5px;
   box-sizing: border-box;
-  background: var(--background-gre1);
+  background: var(--background-gre2);
   border: 4px inset var(--green-6);
   border-radius: 35px / 25px;
 }
@@ -99,7 +99,7 @@
     height: 40px;
     width: 50%;
     filter: none;
-    font-weight: 300;
+    font-weight: 700;
     font-size: larger;
      border: 5px solid var(--green-8);
      text-align: center;

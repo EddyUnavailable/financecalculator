@@ -48,7 +48,7 @@ export default function SummaryPage() {
             <h2 className={styles.subtitle}>Remaining Balance</h2>
             <p
               className={styles.total1}
-              style={{ color: remaining >= 0 ? 'var(--green-1)' : 'red' }}
+              style={{ color: remaining >= 0 ? 'var(--green-1)' : 'var(--red-1)' }}
             >
               £{remaining.toFixed(2)}
             </p>
